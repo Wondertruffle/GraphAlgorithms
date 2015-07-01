@@ -8,12 +8,12 @@ import java.util.HashMap;
 
 /**
  * A class which represents a social network as a weighted directed graph.  Each vertex represents a person.  Each edge
- * represents acquaintanceship in the following manner: if there is an edge A -> B with weight 2, A knows B with affinity
+ * represents acquaintanceship in the following manner: if there is an edge A to B with weight 2, A knows B with affinity
  * 2.  The weights on the edges can be interpreted as inversely proportional to the strength of the bond; for example,
- * if A is married to B we might have edges A->B with weight 0.1, B->A with weight 0.1.  Likewise, if A met B once at a
- * party, but B doesn't remember A, we might have A->B with weight 12.5 and no edge B->A.
+ * if A is married to B we might have edges A to B with weight 0.1, B to A with weight 0.1.  Likewise, if A met B once at a
+ * party, but B doesn't remember A, we might have A to B with weight 12.5 and no edge B to A.
  */
-public class WeightedSocialDigraph implements Graph<Person,Double> {
+public class WeightedSocialDigraph implements Graph<Person,Double>, Weighing {
 
     private static int currentID = 0;
     private Map<Integer, Person> vertices;
@@ -88,5 +88,16 @@ public class WeightedSocialDigraph implements Graph<Person,Double> {
             if(edges.get(i).getSrcID() == id) result.add(i);
         }
         return result;
+    }
+
+    @Override
+    public double weight(int id) throws IllegalArgumentException {
+        try
+        {
+            return getAttribute(id);
+        } catch (IllegalArgumentException e)
+        {
+            throw e;
+        }
     }
 }
