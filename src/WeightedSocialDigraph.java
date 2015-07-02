@@ -36,6 +36,17 @@ public class WeightedSocialDigraph implements Graph<Person,Double>, Weighing {
         if(!vertices.containsKey(srcID)) throw new IllegalArgumentException(srcID + " is not a valid vertex ID.");
         if(!vertices.containsKey(dstID)) throw new IllegalArgumentException(dstID + " is not a valid vertex ID.");
 
+        //check if edge already exists in the graph
+        for(Integer i : edges.keySet())
+        {
+            WeightedDigraphEdge e = edges.get(i);
+            if(e.getSrcID() == srcID && e.getDestID() == dstID)
+            {
+                System.out.println("Edge from " + srcID + " to " + dstID + " already exists with weight " + e.getWeight());
+                return i;
+            }
+        }
+
         WeightedDigraphEdge edge = new WeightedDigraphEdge(srcID, dstID, aDouble);
         edges.put(currentID++, edge);
 

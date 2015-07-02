@@ -15,9 +15,6 @@ public class GraphLibrary {
 
     /**
      * Finds the shortest path between <code>src</code> and <code>dest</code> using Dijkstra's shortest-path algorithm.
-     * Note that the current implementation assumes that there is indeed <i>some</i> path between <code>src</code>
-     * and <code>dest</code>; as it stands, if they are located in different connected components of a disconnected
-     * graph, this implementation will run forever.
      * @param input The graph on which the search is being performed.
      * @param src The source vertex of the path.
      * @param dest The destination vertex.
@@ -75,6 +72,15 @@ public class GraphLibrary {
             }
 
             unvisited.remove(currentNode);
+
+            //check if we have explored all of the connected component containing src
+            boolean unreachable = true;
+            for(Integer i : unvisited)
+            {
+                if(distances.get(i) < Double.POSITIVE_INFINITY) unreachable = false;
+            }
+            if(unreachable) return null;
+
             int minimumDistanceNode = unvisited.iterator().next();
             for(Integer i : unvisited)
             {
