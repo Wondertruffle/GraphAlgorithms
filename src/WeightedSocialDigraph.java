@@ -15,8 +15,19 @@ import java.util.HashMap;
  */
 public class WeightedSocialDigraph implements Graph<Person,Double>, Weighing {
 
+    /**
+     * The ID of the next vertex or edge to be added.
+     */
     private static int currentID = 0;
+
+    /**
+     * A mapping from vertex ID to vertex data.
+     */
     private Map<Integer, Person> vertices;
+
+    /**
+     * A mapping from edge ID to edge object.
+     */
     private Map<Integer, WeightedDigraphEdge> edges;
 
     public WeightedSocialDigraph()

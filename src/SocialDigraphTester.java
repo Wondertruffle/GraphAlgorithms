@@ -12,17 +12,17 @@ public class SocialDigraphTester {
     public static void main(String[] args)
     {
         File graphFile = new File("src/people.csv");
-        WeightedSocialDigraph graph = graphFileParser(graphFile);
+        WeightedSocialDigraph graph = parseGraphFile(graphFile);
         if(graph == null) return;
         System.out.println("Number of vertices: " + graph.getVertices().size());
         System.out.println("Number of edges: " + graph.getEdges().size());
 
-        List<Integer> path = GraphLibrary.shortestPath(graph, 0, 10);
-        System.out.println("Shortest path from 0 to 10: ");
+        List<Integer> path = GraphLibrary.shortestPath(graph, 0, 11);
+        System.out.println("Shortest path from 0 to 11: ");
         System.out.println(path.toString());
     }
 
-    public static WeightedSocialDigraph graphFileParser(File file)
+    public static WeightedSocialDigraph parseGraphFile(File file)
     {
         BufferedReader reader = null;
         try {

@@ -105,8 +105,19 @@ public class GraphLibrary {
         return path;
     }
 
-    public static <V,E> Graph<V,E> MSTPrim(Graph<V,E> input)
+    public static <V,E, G extends Graph<V,E> & Weighing> Graph<V,E> MSTPrim(G input)
     {
+        HashMap<Integer,Double> cost = new HashMap<>();
+        HashMap<Integer,Integer> cheapestEdges = new HashMap<>();
+
+        for(Integer i : input.getVertices())
+        {
+            cost.put(i,Double.POSITIVE_INFINITY);
+            cheapestEdges.put(i, null);
+        }
+
+
+
         return null; //TODO
     }
 
