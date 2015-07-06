@@ -13,7 +13,7 @@ import java.util.HashMap;
  * if A is married to B we might have edges A to B with weight 0.1, B to A with weight 0.1.  Likewise, if A met B once at a
  * party, but B doesn't remember A, we might have A to B with weight 12.5 and no edge B to A.
  */
-public class WeightedSocialDigraph implements Graph<Person,Double>, Weighing {
+public class WeightedSocialDigraph extends DataDigraph<Person,Double> implements Weighing {
 
     /**
      * The ID of the next vertex or edge to be added.
@@ -88,10 +88,12 @@ public class WeightedSocialDigraph implements Graph<Person,Double>, Weighing {
     }
 
     @Override
-    public int getSource(int id) throws IllegalArgumentException {
+    public int getSrc(int id) throws IllegalArgumentException {
         if(!edges.containsKey(id)) throw new IllegalArgumentException(id + " is not a valid edge ID.");
         return edges.get(id).getSrcID();
     }
+
+
 
     @Override
     public int getDest(int id) throws IllegalArgumentException {
@@ -99,7 +101,6 @@ public class WeightedSocialDigraph implements Graph<Person,Double>, Weighing {
         return edges.get(id).getDestID();
     }
 
-    @Override
     public Set<Integer> getEdgesOf(int id) throws IllegalArgumentException {
         if(!vertices.containsKey(id)) throw new IllegalArgumentException(id + " is not a valid vertex ID.");
 
@@ -121,5 +122,21 @@ public class WeightedSocialDigraph implements Graph<Person,Double>, Weighing {
         {
             throw e;
         }
+    }
+
+    @Override
+    public Set<Integer> getNeighborsOf(int id)
+    {
+        return new HashSet<Integer>(); //TODO
+    }
+
+    @Override
+    public int addEdge(int srcID, int dstID) throws IllegalArgumentException {
+        return addEdge(srcID, dstID, 0.00);
+    }
+
+    @Override
+    public int addVertex() {
+        return addVertex(new Person("Default Name", 0.0, 0.0, 0));
     }
 }
